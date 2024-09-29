@@ -1,0 +1,25 @@
+@model CircleModel
+@{
+    ViewData["Title"] = "Okrąg";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<div class="d-flex">
+    @await Html.PartialAsync("_FigurePreview", "https://pl.numberempire.com/shapes/images/circle_main.png")
+    <form method="post" asp-action="CalculateCircle">
+        <div class="form-group">
+            <label for="Radius">Promień:</label>
+            <input type="number" class="form-control" id="Radius" name="Radius" value="@Model.Radius" />
+        </div>
+        <button type="submit" class="btn btn-primary">Oblicz</button>
+    </form>
+</div>
+
+@if(Context.Request.Method == "POST")
+{
+    <h2 class="mt-4">Wyniki:</h2>
+    <p>Średica: @Model.Diameter</p>
+    <p>Pole: @Model.Area</p>
+    <p>Obwód: @Model.Circumference</p>
+}

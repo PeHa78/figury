@@ -1,0 +1,25 @@
+@model TriangleModel
+@{
+    ViewData["Title"] = "Trójkąt";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<div class="d-flex">
+     @await Html.PartialAsync("_FigurePreview", "https://pl.numberempire.com/shapes/images/equilateral_triangle_main.png")
+    <form method="post" asp-action="CalculateTriangle">
+        <div class="form-group">
+            <label for="Side">Bok:</label>
+            <input type="number" class="form-control" id="Side" name="Side" value="@Model.Side" />
+        </div>
+        <button type="submit" class="btn btn-primary">Oblicz</button>
+    </form>
+</div>
+
+@if(Context.Request.Method == "POST")
+{
+    <h2 class="mt-4">Wyniki:</h2>
+    <p>Pole: @Model.Area</p>
+    <p>Obwód: @Model.Circumference</p>
+    <p>Wysokość: @Model.Height</p>
+}
